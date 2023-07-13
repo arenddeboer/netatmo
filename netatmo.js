@@ -150,6 +150,12 @@ netatmo.prototype.authenticate = function (args, callback) {
  */
 netatmo.prototype.authenticate_refresh = function (refresh_token) {
 
+	if (args.refresh_token) {
+    refresh_token = args.refresh_token;
+  }
+	 client_id = args.client_id;
+  client_secret = args.client_secret;
+	
   var form = {
     grant_type: 'refresh_token',
     refresh_token: refresh_token,

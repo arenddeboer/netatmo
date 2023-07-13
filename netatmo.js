@@ -5,8 +5,8 @@ var moment = require('moment');
 
 const BASE_URL = 'https://api.netatmo.net';
 
-var username;
-var password;
+// var username;
+// var password;
 var client_id;
 var client_secret;
 var scope;
@@ -19,7 +19,8 @@ var refresh_token;
  */
 var netatmo = function (args) {
   EventEmitter.call(this);
-  this.authenticate(args);
+  // this.authenticate(args);
+  this.refresh_token(args);
 };
 
 util.inherits(netatmo, EventEmitter);
@@ -95,8 +96,8 @@ netatmo.prototype.authenticate = function (args, callback) {
   }
   */
 
-  username = args.username;
-  password = args.password;
+  // username = args.username;
+  // password = args.password;
   client_id = args.client_id;
   client_secret = args.client_secret;
   scope = args.scope || 'read_station read_thermostat write_thermostat read_camera write_camera access_camera read_presence access_presence read_smokedetector read_homecoach';
@@ -174,6 +175,7 @@ netatmo.prototype.authenticate_refresh = function (refresh_token) {
     if (body.expires_in) {
       setTimeout(this.authenticate_refresh.bind(this), body.expires_in * 1000, body.refresh_token);
     }
+	  this.emit('authenticated');
 
     return this;
   }.bind(this));

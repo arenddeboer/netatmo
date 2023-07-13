@@ -72,7 +72,6 @@ netatmo.prototype.authenticate = function (args, callback) {
 
   if (args.refresh_token) {
     refresh_token = args.refresh_token;
-    return this;
   }
 
   if (!args.client_id) {

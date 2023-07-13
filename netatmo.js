@@ -20,7 +20,7 @@ var refresh_token;
 var netatmo = function (args) {
   EventEmitter.call(this);
   // this.authenticate(args);
-  this.refresh_token(args);
+  this.authenticate_refresh(args);
 };
 
 util.inherits(netatmo, EventEmitter);

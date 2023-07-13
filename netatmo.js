@@ -11,6 +11,7 @@ var client_id;
 var client_secret;
 var scope;
 var access_token;
+var refresh_token;
 
 /**
  * @constructor
@@ -69,6 +70,11 @@ netatmo.prototype.authenticate = function (args, callback) {
     return this;
   }
 
+  if (args.refresh_token) {
+    refresh_token = args.refresh_token;
+    return this;
+  }
+
   if (!args.client_id) {
     this.emit("error", new Error("Authenticate 'client_id' not set."));
     return this;
@@ -78,7 +84,7 @@ netatmo.prototype.authenticate = function (args, callback) {
     this.emit("error", new Error("Authenticate 'client_secret' not set."));
     return this;
   }
-
+  /*
   if (!args.username) {
     this.emit("error", new Error("Authenticate 'username' not set."));
     return this;
@@ -88,6 +94,7 @@ netatmo.prototype.authenticate = function (args, callback) {
     this.emit("error", new Error("Authenticate 'password' not set."));
     return this;
   }
+  */
 
   username = args.username;
   password = args.password;
@@ -98,10 +105,11 @@ netatmo.prototype.authenticate = function (args, callback) {
   var form = {
     client_id: client_id,
     client_secret: client_secret,
-    username: username,
-    password: password,
+    refresh_token: refresh_token,
+    // username: username,
+    // password: password,
     scope: scope,
-    grant_type: 'password',
+    grant_type: 'authorization_code',
   };
 
   var url = util.format('%s/oauth2/token', BASE_URL);

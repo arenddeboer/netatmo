@@ -149,12 +149,24 @@ netatmo.prototype.authenticate = function (args, callback) {
  * @returns {netatmo}
  */
 netatmo.prototype.authenticate_refresh = function (refresh_token) {
+let args = {}
 
-	if (args.refresh_token) {
+if(typeof refresh_token === 'object) {
+   args = refresh_token
+}
+
+if (args.refresh_token) {
     refresh_token = args.refresh_token;
+}
+
+if (args.client_id) {
+    client_id = args.client_id;
   }
-	 client_id = args.client_id;
-  client_secret = args.client_secret;
+
+if (args.client_secret) {
+    client_secret = args.client_secret;
+}
+ 
 	
   var form = {
     grant_type: 'refresh_token',

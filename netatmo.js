@@ -151,10 +151,14 @@ netatmo.prototype.authenticate = function (args, callback) {
 netatmo.prototype.authenticate_refresh = function (refresh_token) {
 let args = {}
 
-if(typeof refresh_token === 'object) {
+if(typeof refresh_token === 'object') {
    args = refresh_token
 }
-
+// scope = args.scope || 'read_station 
+if (args.scope) {
+    scope = args.scope;
+}
+	
 if (args.refresh_token) {
     refresh_token = args.refresh_token;
 }

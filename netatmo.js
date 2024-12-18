@@ -1577,4 +1577,4 @@ netatmo.prototype.setPersonAway = function (options, callback) {
   return this;
 };
 
-module.exports = netatmo;
+exports.default = netatmo;

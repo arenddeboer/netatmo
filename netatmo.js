@@ -193,7 +193,7 @@ if (args.client_secret) {
     body = JSON.parse(body);
 
     access_token = body.access_token;
-
+    process.emit("got_refresh_token", body.refresh_token)
     if (body.expires_in) {
       setTimeout(this.authenticate_refresh.bind(this), body.expires_in * 1000, body.refresh_token);
     }
